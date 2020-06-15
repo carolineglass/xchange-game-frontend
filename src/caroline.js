@@ -2,6 +2,8 @@
 document.addEventListener('DOMContentLoaded', function(e) {
     const countryImg = document.querySelector('.country')
     const itemImg = document.querySelector('.item')
+    const counter = document.getElementById('counter')
+    let countdown = setInterval(startTimer, 1000);
 
     const getConversions = () => {
     fetch('http://localhost:3000/conversions')
@@ -11,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
     document.addEventListener('click', e => {
         if (e.target.className === "generate"){
             getConversions()
-            startTimer()
+            counter.innerText = 10;
+            countdown
         }//end of if for generate button
 
     })// end of event listener
@@ -35,9 +38,14 @@ document.addEventListener('DOMContentLoaded', function(e) {
     };
     
     function startTimer() {
-        
+        let number = parseInt(counter.innerText)
+        if (number > 0){
+            number -- 
+            counter.innerText = number
+        }
     }
     
+
 
 
 })//end of DOMContentLoaded
