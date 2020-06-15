@@ -1,0 +1,105 @@
+
+ /* html {
+    scroll-behavior: smooth;
+   
+  }
+  section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+  }
+   body{
+       margin:0;
+       background-color: #fef2db;
+   
+   } */
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 0px;
+    flex-direction: row;
+    background-color: rgb(117, 230, 4);
+    text-align: center
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100vh;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.scoreboard {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.leaderboard {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100vh;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+    justify-content: center;
+    align-items: center;
+}
+
+.top-row {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    height: 50%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.country {
+    display: flex;
+    width: 50%;
+    height: 85%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.item {
+    display: flex;
+    width: 50%;
+    height: 85%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.user-bar {
+    display: flex;
+    width: 95%;
+    height: 50%;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+}
