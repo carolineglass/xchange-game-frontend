@@ -2,16 +2,33 @@
 document.addEventListener('DOMContentLoaded', function(e){
 
     const conversionsUrl = ""
-    // const counter = document.getElementById('counter')
+    const scoreboardUrl = "http://localhost:3000/scoreboards"
+    const leaderboard = document.querySelector('.leaderboard')
 
-    // let decrementCounter = () => {
-    //     let number = parseInt(counter.innerText)
-    //     if (number > 0){
-    //         number -- 
-    //     counter.innerText = number
-    //     } // else if when number = 0 to throw an error to user time is up 
-    // }
+    const fetchScores = () => {
+        fetch(scoreboardUrl)
+        .then(resp => resp.json())
+        .then(score => {
+            renderScores(score)
+        })
+    }
 
-    // let timer = setInterval (decrementCounter, 1000);
+    const renderScores = score => {
+        score.forEach(scoreObj => {
+            renderScore(scoreObj)}
+        )}
+
+    const renderScore = scoreObj => {
+        const ol = document.createElement('ol')
+        ol.innerHTML = `
+        <h3>${scoreObj.username}</h3>
+        <h3>${scoreObj.score}</h3>`
+
+        leaderboard.append(ol)
+    }
+
+    fetchScores()
+
+
 
 })
