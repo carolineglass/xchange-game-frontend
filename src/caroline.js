@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const counter = document.getElementById('counter')
     const form = document.querySelector('.user-form')
 
+    let score = document.querySelector('#score')
+
+    let correctAnswer = 0
+
     let countdown = setInterval(startTimer, 1000);
 
     const getConversions = () => {
@@ -56,28 +60,49 @@ document.addEventListener('DOMContentLoaded', function(e) {
         const currency = conversion["country"]["currency"]
         const price = conversion["item"]["price"]
     
-        const correctAnswer = price * rate
+        correctAnswer = price * rate
         console.log(correctAnswer)
-        compareGuessAndAnswer(correctAnswer) 
     }
 
     form.addEventListener('submit', e => {
         e.preventDefault()
-        const guess = parseInt(e.target.guess.value)
+        const guess = parseFloat(e.target.guess.value)
         console.log(guess)
-
+        calculateScore(guess)
+        
+        
     })//end of submit guess
     
-    function compareGuessAndAnswer(correctAnswer) {
-        correctAnswer
+    function calculateScore(guess) {
+        let x = guess //the users input 
+        let y = correctAnswer // in the global scope 
+        let parsedScore = parseInt(score.innerText)
 
+        if (x >= (y - y * .10) && x <= (y + y * .10)) { 
+            parsedScore += 5
+            score.innerText = parsedScore
+            console.log('YOU GOT 5 POINTS!')
+        }//end of if for 10%
 
-    
+        else if (x >= (y - y * .2) && x <= (y + y * .2)) {
+            parsedScore += 3
+            score.innerText = parsedScore
+            console.log('YOU GOT 3 POINTS!')
+        }//end of else if for 20%
+
+        else if (x >= (y - y * .3) && x <= (y + y * .3)) {
+            parsedScore += 1
+            score.innerText = parsedScore
+            console.log('YOU GOT 1 POINTS!')
+        }//end of else if for 30%
+
+        else {
+           // GET AN X  
+            console.log('SO UNCULTURED')
+        }
     }
-    
-    // if (e.target.id === "guess-button") {
-        
-    // }
+
+    // if the timer/counter number === 0 display "TIMES UP - the correct answer is ..."
 
 
 })//end of DOMContentLoaded

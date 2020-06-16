@@ -14,7 +14,7 @@
           <h3 id='counter'>
             0
           </h3>
-          <p>SCORE: <span>0</span> </p>
+          <p>SCORE: <span id="score">0</span> </p>
         </div>
         <div class="leaderboard">
           <h2>HIGHSCORES</h2>
@@ -35,7 +35,7 @@
         </div>
         <div class="user-bar">
           <form class="user-form">
-            <input class="guess-input" type="text" name="guess" placeholder="Guess value..."/>
+            <input class="guess-input" type="number" step="any" name="guess" placeholder="Guess value..."/>
             <button class="big-button" type="submit">Guess</button>
           </form>
           <button id="generate" class='big-button'>Generate</button>
