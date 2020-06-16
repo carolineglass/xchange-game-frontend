@@ -1,9 +1,16 @@
 
 document.addEventListener('DOMContentLoaded', function(e){
+    
+        fetch('http://localhost:3000/conversions')
+        .then(resp => resp.json())
+        .then(console.log)
+
 
     const conversionsUrl = ""
     const scoreboardUrl = "http://localhost:3000/scoreboards"
     const leaderboard = document.querySelector('.leaderboard')
+    const ol = document.createElement('ol')
+
 
     const fetchScores = () => {
         fetch(scoreboardUrl)
@@ -14,21 +21,21 @@ document.addEventListener('DOMContentLoaded', function(e){
     }
 
     const renderScores = score => {
+        console.log(score)
         score.forEach(scoreObj => {
             renderScore(scoreObj)}
         )}
 
     const renderScore = scoreObj => {
-        const ol = document.createElement('ol')
-        ol.innerHTML = `
-        <h3>${scoreObj.username}</h3>
-        <h3>${scoreObj.score}</h3>`
+        const li = document.createElement("li")
+        li.innerHTML = `
+        ${scoreObj.username} <br>
+        ${scoreObj.score}`
 
+        ol.append(li)
         leaderboard.append(ol)
     }
 
     fetchScores()
-
-
 
 })

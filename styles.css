@@ -16,7 +16,6 @@
 
 .main-container {
     display: flex;
-    flex-direction: column;
     width: 100vw;
     height: 100vh;
     margin: 0 0px;
@@ -30,7 +29,7 @@
     flex-direction: column;
     width: 25%;
     height: 100vh;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     justify-content: center;
     align-items: center;
@@ -39,15 +38,18 @@
 
 .scoreboard {
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 80%;
     height: 100%;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
 }
 
 .leaderboard {
     display: flex;
+    flex-direction: column;
     width: 80%;
     height: 100%;
     padding: 10px;
@@ -60,7 +62,7 @@
     flex-direction: column;
     width: 75%;
     height: 100vh;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
     justify-content: center;
@@ -70,36 +72,57 @@
 .top-row {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     width: 95%;
     height: 50%;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
 }
 
 .country {
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     width: 50%;
-    height: 85%;
-    padding: 10px;
+    height: 100%;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
+}
+
+#country-flag {
+    max-width: 300px;
+    max-height: 50%;
 }
 
 .item {
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     width: 50%;
-    height: 85%;
-    padding: 10px;
+    height: 100%;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
 }
 
+#item-img {
+    max-width: 300px;
+    max-height: 50%;
+}
+
 .user-bar {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     width: 95%;
     height: 50%;
-    padding: 10px;
+    /* padding: 10px; */
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(0, 0, 0);
 }
