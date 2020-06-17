@@ -8,13 +8,23 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const itemPrice = document.querySelector('#item-price')
     const itemName = document.querySelector('#item-name')
     const counter = document.getElementById('counter')
-    const form = document.querySelector('.user-form')
+    const xMarker = document.querySelector('#x-marker')
+    const xTag = document.createElement('p')
+    const scoreboardUrl = "http://localhost:3000/scoreboards"
+    const leaderboard = document.querySelector('.leaderboard')
+    const ol = document.createElement('ol')
+    const greeting = document.querySelector('#game-title')
+    const pTag = document.createElement('p')
+
+    // let guessInput = document.querySelector('.guess-input')
 
     let score = document.querySelector('#score')
 
     let correctAnswer = 0
 
     let countdown = setInterval(startTimer, 1000);
+    
+    fetchScores()
 
     const getConversions = () => {
     fetch('http://localhost:3000/conversions')
@@ -27,6 +37,15 @@ document.addEventListener('DOMContentLoaded', function(e) {
             counter.innerText = 15;
             countdown
         }//end of if for generate button
+        else if(e.target.id === 'restart'){
+            score.innerText = 0
+            xTag.innerText = ""
+            pTag.innerHTML = ""
+            const x = document.querySelector('.game-over')
+            const y = document.querySelector('.username')
+            x.style.display = 'none';
+            y.style.display = 'flex';
+        }
     })// end of event listener
     
    function renderCountryItem(data) {
@@ -64,12 +83,34 @@ document.addEventListener('DOMContentLoaded', function(e) {
         console.log(correctAnswer)
     }
 
-    form.addEventListener('submit', e => {
+    document.addEventListener('submit', e => {
+        if(e.target.className === 'user-form'){
         e.preventDefault()
-        const guess = parseFloat(e.target.guess.value)
-        console.log(guess)
+        let guess = parseFloat(e.target.guess.value)
+        console.log(e.target.guess.value)
         calculateScore(guess)
-        
+        // guessInput = ''
+        } // if for user-form
+
+        else if(e.target.className === 'username'){
+            e.preventDefault()
+            const username = e.target.username.value
+            startGame()
+
+            fetch("http://localhost:3000/scoreboards", {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    score: 0})
+            })
+            .then(resp => resp.json())
+            .then(username => {renderGreeting(username)})
+
+        }// else if for username
         
     })//end of submit guess
     
@@ -99,10 +140,84 @@ document.addEventListener('DOMContentLoaded', function(e) {
         else {
            // GET AN X  
             console.log('SO UNCULTURED')
+            xTag.innerText += 'X'
+            xMarker.append(xTag)
+            if(xTag.innerText === 'XXX'){
+                console.log('end of game you uncultured person')
+                const x = document.querySelector('.game-div')
+                const y = document.querySelector('.game-over')
+                x.style.display = 'none';
+                y.style.display = 'flex';
+                newScoreBoard()
+                pTag.innerHTML = ''
+            }
         }
     }
 
     // if the timer/counter number === 0 display "TIMES UP - the correct answer is ..."
+
+
+    function startGame() {
+        const x = document.querySelector('.game-div')
+        const y = document.querySelector('.username')
+        if (x.style.display === "none") {
+          x.style.display = 'flex';
+          y.style.display = 'none';
+        } else {
+          x.style.display = "none";
+          y.style.display = 'flex';
+        }
+      }
+
+    function renderGreeting(username) {
+        pTag.dataset.id = username.id
+        pTag.innerHTML = ' '
+        pTag.innerHTML = `Welcome to the game ${username.username}! Please read the rules before starting!`
+        greeting.append(pTag)
+    }
+
+    function newScoreBoard(){
+        const findUserId = document.querySelector("#game-title > p")
+        const userId = findUserId.dataset.id
+        fetch(`http://localhost:3000/scoreboards/${userId}`,{
+            method: "PATCH",
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify({score: score.innerText})
+        })
+        .then(resp => resp.json())
+        .then(scoreObj => {
+            renderScore(scoreObj)
+        })
+
+    }
+
+    function fetchScores() {
+        fetch(scoreboardUrl)
+        .then(resp => resp.json())
+        .then(score => {
+            renderScores(score)
+        })
+    }
+
+    function renderScores(score) {
+        score.forEach(scoreObj => {
+            renderScore(scoreObj)}
+        )
+    }
+
+    function renderScore(scoreObj) {
+        ol.children.innerHTML = ''
+        const li = document.createElement("li")
+        li.innerHTML = `
+        ${scoreObj.username} <br>
+        ${scoreObj.score}`
+
+        ol.append(li)
+        leaderboard.append(ol)
+    }
 
 
 })//end of DOMContentLoaded

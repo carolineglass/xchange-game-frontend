@@ -4,17 +4,16 @@
     <meta charset="utf-8" />
     <title>xchange game</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script defer type="text/javascript" src="src/josh.js"></script>
     <script defer type="text/javascript" src="src/caroline.js"></script>
   </head>
   <body>
     <div class="main-container">
       <div class="left-container">
         <div class="scoreboard">
-          <h3 id='counter'>
+          <h1 id='counter'>
             0
-          </h3>
-          <p>SCORE: <span id="score">0</span> </p>
+          </h1>
+          <p id='x-marker'>SCORE: <span id="score">0</span> </p>
         </div>
         <div class="leaderboard">
           <h2>HIGHSCORES</h2>
@@ -34,11 +33,27 @@
           </div>
         </div>
         <div class="user-bar">
-          <form class="user-form">
-            <input class="guess-input" type="number" step="any" name="guess" placeholder="Guess value..."/>
-            <button class="big-button" type="submit">Guess</button>
-          </form>
-          <button id="generate" class='big-button'>Generate</button>
+          <div class='rules'>
+            <h1 id='game-title'>Guess that Price</h1>
+            <h3>Rules:</h3>
+          </div>
+          <div class='user-box'>
+            <form class="username" style='display:flex'>
+              <input class="username" type="text" name="username" placeholder="Enter Username"/>
+              <button class="big-button" type="submit">Submit</button>
+            </form>
+            <div class='game-div' style="display:none">
+              <form class="user-form">
+                <input class="guess-input" type="number" step="any" name="guess" placeholder="Guess value..."/>
+                <button class="test-button" type="submit">Guess</button>
+              </form>
+              <button id="generate" class='big-button'>Generate</button>
+            </div>
+            <div class='game-over' style='display:none'>
+              <h2>Game Over!</h2>
+              <button id="restart" class='big-button'>Play Again</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
