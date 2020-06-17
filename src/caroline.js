@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     let correctAnswer = 0
 
-    const countdown = setInterval(startTimer, 1000);
+    let currentScore = '0'
+
+    let countdown = setInterval(startTimer, 1000);
     
     fetchScores()
 
@@ -101,18 +103,25 @@ document.addEventListener('DOMContentLoaded', function(e) {
     document.addEventListener('submit', e => {
         if(e.target.className === 'user-form'){
             e.preventDefault()
-            clearInterval(countdown)
             guessButton.disabled = true
             generateButton.disabled = false
             let guess = parseFloat(e.target.guess.value)
             console.log(e.target.guess.value)
             calculateScore(guess)
 
+            if (xTag.innerText.length === 3) {
+                counter.innerText = "GAME OVER!"
+            } else if (xTag.innerText.length < 3){
+                counter.innerText = "GENERATE AGAIN!"
+            }
+
             //changes the innerHTML of the rules div to display correct answer 
             //and points
 
             rulesBox.innerHTML = 
-            `<h2>The correct conversion is ${correctAnswer.toFixed(2)}</h2>`
+            `<h2 id="correct-message">The correct conversion is ${correctAnswer.toFixed(2)}. <br>
+            You get ${currentScore}</h2>
+            `
             
         // guessInput = ''
         } // if for user-form
@@ -145,26 +154,30 @@ document.addEventListener('DOMContentLoaded', function(e) {
         let x = guess //the users input 
         let y = correctAnswer // in the global scope 
         let parsedScore = parseInt(score.innerText)
-
+        const message = document.getElementById("correct-message")
         if (x >= (y - y * .10) && x <= (y + y * .10)) { 
             parsedScore += 5
             score.innerText = parsedScore
+            currentScore = '5 points'
             console.log('YOU GOT 5 POINTS!')
         }//end of if for 10%
 
         else if (x >= (y - y * .2) && x <= (y + y * .2)) {
             parsedScore += 3
             score.innerText = parsedScore
+            currentScore = '3 points'
             console.log('YOU GOT 3 POINTS!')
         }//end of else if for 20%
 
         else if (x >= (y - y * .3) && x <= (y + y * .3)) {
             parsedScore += 1
             score.innerText = parsedScore
-            console.log('YOU GOT 1 POINTS!')
+            currentScore = '1 point'
+            console.log('YOU GOT 1 POINT!')
         }//end of else if for 30%
 
         else {
+            currentScore = '0 points'
             endGame()
         }
     }
@@ -181,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             x.style.display = 'none';
             y.style.display = 'flex';
             newScoreBoard()
-            pTag.innerHTML = ''
+            counter.innerText = "GAME OVER!"
         }
     }
 
@@ -201,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         leaderboard.dataset.id = username.id
         const pTag = document.createElement('p')
         pTag.innerHTML = ' '
-        pTag.innerHTML = `Welcome to the game ${username.username}! Please read the rules before starting!`
+        pTag.innerHTML = `Welcome to the game ${username.username}!`
         greeting.append(pTag)
     }
 
@@ -234,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             return b.score - a.score;
           });
     //this sorts by score highest to lowest
-        score.slice(0,5).forEach(scoreObj => {
+        score.slice(0,10).forEach(scoreObj => {
     //this only renders the first 5 of the array 
             renderScore(scoreObj)}
         )

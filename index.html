@@ -17,7 +17,7 @@
           <p id='x-marker'>SCORE: <span id="score">0</span> </p>
         </div>
         <div class="leaderboard">
-          <h2>TOP 5 PLAYERS</h2>
+          <h2>TOP 10 PLAYERS</h2>
         </div>
       </div>
       <div class="right-container">
@@ -36,7 +36,11 @@
         <div class="user-bar">
           <div class='rules'>
             <h1 id='game-title'>Guess that Price</h1>
-            <h3>Rules:</h3>
+            <p id="rules-text">Click the generate button to display a 
+              country's currency and random item. Put your best guess in for what it converts to!
+              You get 5 points if your guess is within a 10% range of the correct answer, 3 points within 20%,
+              and 1 point within 30%. You have 15 seconds to guess or you get an X. 3 X's and your out!
+            </p>
           </div>
           <div class='user-box'>
             <form class="username" style='display:flex'>
@@ -51,7 +55,6 @@
               <button id="generate" class='big-button'>Generate</button>
             </div>
             <div class='game-over' style='display:none'>
-              <h2>Game Over!</h2>
               <button id="restart" class='big-button'>Play Again</button>
             </div>
           </div>

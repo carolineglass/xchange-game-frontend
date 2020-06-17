@@ -203,6 +203,9 @@
   color: rgb(160, 22, 22);
 }
 
+#rules-text {
+  font-size: 14px;
+}
 /* experimenting with buttons */
 
 :root {
