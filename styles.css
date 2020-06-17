@@ -12,7 +12,7 @@
    
   body{
     font-family: 'Bungee Inline', cursive;
-   
+    font-size: 12px;
    }
 
 .main-container {
@@ -21,7 +21,7 @@
     height: 100vh;
     margin: 0 0px;
     flex-direction: row;
-    background-color: white;
+    background-color: lightcoral;
     text-align: center
 }
 
@@ -31,11 +31,12 @@
     width: 25%;
     height: 100vh;
     /* padding: 10px; */
-    /* background-color: cornflowerblue; */
-    background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930);
+    background-color: cornflowerblue;
+    /* background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930);*/
     justify-content: center;
     align-items: center;
-    /* border: 2px solid rgb(0, 0, 0); */
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 20%;
 }
 
 .scoreboard {
@@ -76,10 +77,10 @@
     padding: 10px;
     /* background-color: black; */
     background-image: url("https://img.freepik.com/free-photo/black-chalk-board-texture_89245-170.jpg?size=626&ext=jpg");
-    border-radius: 5%;
+    border-radius: 20%;
     font-family: Play;
     color: white;
-    border: 10px solid white;
+    border: 7px dotted white;
 }
 
 .right-container {
@@ -89,7 +90,7 @@
     height: 100vh;
     /* padding: 10px; */
     background-color: lightblue;
-    /* border: 2px solid rgb(0, 0, 0); */
+    border: 1px solid rgb(0, 0, 0);
     justify-content: center;
     align-items: center;
 }
@@ -160,8 +161,8 @@
   width: 50%;
   height: 100%;
   /* padding: 10px; */
-  background-color: rgb(23, 87, 205);
-  border: 10px double white;
+  background-color: coral;
+  border: 1px solid black;
   border-radius: 10%;
 }
 
@@ -174,6 +175,8 @@
   height: 100%;
   /* padding: 10px; */
   border-radius: 10%;
+  background-color: lightcyan;
+  border: 1px solid black;
   /* background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930); */
 }
 

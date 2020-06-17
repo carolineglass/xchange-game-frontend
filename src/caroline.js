@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const scoreboardUrl = "http://localhost:3000/scoreboards/"
     const leaderboard = document.querySelector('.leaderboard')
     const ol = document.createElement('ol')
-    const greeting = document.querySelector('#game-title')
-    const pTag = document.createElement('p')
+    let greeting = document.querySelector('#game-title')
+    const generateButton = document.querySelector('#generate')
+    const guessButton = document.querySelector('#guess-button')
+    const rulesBox = document.querySelector(".rules")
 
     // let guessInput = document.querySelector('.guess-input')
 
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     let correctAnswer = 0
 
-    let countdown = setInterval(startTimer, 1000);
+    const countdown = setInterval(startTimer, 1000);
     
     fetchScores()
 
@@ -33,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     document.addEventListener('click', e => {
         if (e.target.id === "generate"){
+            e.target.disabled = true
+            guessButton.disabled = false
             getConversions()
             counter.innerText = 15;
             countdown
@@ -40,11 +44,16 @@ document.addEventListener('DOMContentLoaded', function(e) {
         else if(e.target.id === 'restart'){
             score.innerText = 0
             xTag.innerText = ""
-            pTag.innerHTML = ""
+            rulesBox.innerHTML = ""
             const x = document.querySelector('.game-over')
             const y = document.querySelector('.username')
             x.style.display = 'none';
             y.style.display = 'flex';
+            generateButton.disabled = false
+            rulesBox.innerHTML = `
+            <h1 id='game-title'>Guess that Price</h1>
+            <h3>Rules:</h3>
+            `
         }
     })// end of event listener
     
@@ -71,7 +80,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
         if (number > 0){
             number -- 
             counter.innerText = number
-        } // else if when number = 0 to throw an error to user time is up 
+        } else if (number === 0) {
+            counter.innerText = "TIMES UP!"
+            guessButton.disabled = true
+            generateButton.disabled = false
+            endGame()
+            console.log("time is up")
+        } 
     }
     
     function renderAnswer(conversion) {
@@ -85,16 +100,28 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     document.addEventListener('submit', e => {
         if(e.target.className === 'user-form'){
-        e.preventDefault()
-        let guess = parseFloat(e.target.guess.value)
-        console.log(e.target.guess.value)
-        calculateScore(guess)
+            e.preventDefault()
+            clearInterval(countdown)
+            guessButton.disabled = true
+            generateButton.disabled = false
+            let guess = parseFloat(e.target.guess.value)
+            console.log(e.target.guess.value)
+            calculateScore(guess)
+
+            //changes the innerHTML of the rules div to display correct answer 
+            //and points
+
+            rulesBox.innerHTML = 
+            `<h2>The correct conversion is ${correctAnswer.toFixed(2)}</h2>`
+            
         // guessInput = ''
         } // if for user-form
 
         else if(e.target.className === 'username'){
             e.preventDefault()
+            guessButton.disabled = true
             const username = e.target.username.value
+            greeting = document.querySelector('#game-title')
             startGame()
 
             fetch("http://localhost:3000/scoreboards", {
@@ -138,24 +165,25 @@ document.addEventListener('DOMContentLoaded', function(e) {
         }//end of else if for 30%
 
         else {
-           // GET AN X  
-            console.log('SO UNCULTURED')
-            xTag.innerText += 'X'
-            xMarker.append(xTag)
-            if(xTag.innerText === 'XXX'){
-                console.log('end of game you uncultured person')
-                const x = document.querySelector('.game-div')
-                const y = document.querySelector('.game-over')
-                x.style.display = 'none';
-                y.style.display = 'flex';
-                newScoreBoard()
-                pTag.innerHTML = ''
-            }
+            endGame()
         }
     }
 
-    // if the timer/counter number === 0 display "TIMES UP - the correct answer is ..."
-
+    function endGame() {
+        // GET AN X  
+        console.log('SO UNCULTURED')
+        xTag.innerText += 'X'
+        xMarker.append(xTag)
+        if(xTag.innerText.length === 3){
+            console.log('end of game you uncultured person')
+            const x = document.querySelector('.game-div')
+            const y = document.querySelector('.game-over')
+            x.style.display = 'none';
+            y.style.display = 'flex';
+            newScoreBoard()
+            pTag.innerHTML = ''
+        }
+    }
 
     function startGame() {
         const x = document.querySelector('.game-div')
@@ -170,15 +198,15 @@ document.addEventListener('DOMContentLoaded', function(e) {
       }
 
     function renderGreeting(username) {
-        pTag.dataset.id = username.id
+        leaderboard.dataset.id = username.id
+        const pTag = document.createElement('p')
         pTag.innerHTML = ' '
         pTag.innerHTML = `Welcome to the game ${username.username}! Please read the rules before starting!`
         greeting.append(pTag)
     }
 
     function newScoreBoard(){
-        const findUserId = document.querySelector("#game-title > p")
-        const userId = findUserId.dataset.id
+        const userId = leaderboard.dataset.id
         fetch(`http://localhost:3000/scoreboards/${userId}`,{
             method: "PATCH",
             headers: {
