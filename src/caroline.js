@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const counter = document.getElementById('counter')
     const xMarker = document.querySelector('#x-marker')
     const xTag = document.createElement('p')
-    const scoreboardUrl = "http://localhost:3000/scoreboards"
+    const scoreboardUrl = "http://localhost:3000/scoreboards/"
     const leaderboard = document.querySelector('.leaderboard')
     const ol = document.createElement('ol')
     const greeting = document.querySelector('#game-title')
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
         //renders the item and info on the right div
         itemImg.src = randomInfo["item"]["img"]
-        itemPrice.innerText = randomInfo["item"]["price"]
+        itemPrice.innerText = `$${randomInfo["item"]["price"]}`
         itemName.innerText = randomInfo["item"]["name"]
     };
     
@@ -187,10 +187,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
             },
             body: JSON.stringify({score: score.innerText})
         })
-        .then(resp => resp.json())
-        .then(scoreObj => {
-            renderScore(scoreObj)
-        })
+        // .then(resp => resp.json())
+        .then(fetchScores)
 
     }
 
@@ -198,12 +196,18 @@ document.addEventListener('DOMContentLoaded', function(e) {
         fetch(scoreboardUrl)
         .then(resp => resp.json())
         .then(score => {
+            ol.innerHTML = ""
             renderScores(score)
         })
     }
 
     function renderScores(score) {
-        score.forEach(scoreObj => {
+        score.sort(function (a, b) {
+            return b.score - a.score;
+          });
+    //this sorts by score highest to lowest
+        score.slice(0,5).forEach(scoreObj => {
+    //this only renders the first 5 of the array 
             renderScore(scoreObj)}
         )
     }
@@ -212,8 +216,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
         ol.children.innerHTML = ''
         const li = document.createElement("li")
         li.innerHTML = `
-        ${scoreObj.username} <br>
-        ${scoreObj.score}`
+        ${scoreObj.username} 
+        <span id="high-score">${scoreObj.score}</span>`
 
         ol.append(li)
         leaderboard.append(ol)
