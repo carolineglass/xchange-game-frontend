@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const guessButton = document.querySelector('#guess-button')
     const rulesBox = document.querySelector(".rules")
 
-    // let guessInput = document.querySelector('.guess-input')
+    let guessInput = document.querySelector('.guess-input')
 
     let score = document.querySelector('#score')
 
@@ -53,9 +53,24 @@ document.addEventListener('DOMContentLoaded', function(e) {
             y.style.display = 'flex';
             generateButton.disabled = false
             rulesBox.innerHTML = `
-            <h1 id='game-title'>Guess that Price</h1>
-            <h3>Rules:</h3>
+            <h1 id='game-title' style="font-size: 30px;">GUESS THAT CONVERSION!</h1>
+            <p id="rules-text" style="font-family: 'Bungee Inline', cursive;"><span style="font-size: 20px; text-decoration: underline">Rules:</span></p>
+            <ul style="font-family:cursive">
+             <li style="font-size: 20px">Click generate to display a country currency and item.</li> 
+             <li style="font-size: 20px">Put your best guess in for what it converts to!</li>
+             <li style="font-size: 20px">You get 5 points if your guess is within a 10% range of the correct answer, 3 points within 20%,
+              and 1 point within 30%.</li>
+              <li style="font-size: 20px">You have 15 seconds to guess or you get an X. 3 X's and your out!</li>
+            </ul>
             `
+            countryImg.src = 'http://www.pngall.com/wp-content/uploads/1/World-PNG-Clipart.png'
+            countryName.innerText = ""
+            countryCurrency.innerText = ""
+    
+            //renders the item and info on the right div
+            itemImg.src = ""
+            itemPrice.innerText = ""
+            itemName.innerText = ""
         }
     })// end of event listener
     
@@ -102,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     document.addEventListener('submit', e => {
         if(e.target.className === 'user-form'){
+            guessInput.value = ""
             e.preventDefault()
             guessButton.disabled = true
             generateButton.disabled = false
@@ -186,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         // GET AN X  
         console.log('SO UNCULTURED')
         xTag.innerText += 'X'
+        xTag.style.fontSize = "30px"
         xMarker.append(xTag)
         if(xTag.innerText.length === 3){
             console.log('end of game you uncultured person')
@@ -212,6 +229,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     function renderGreeting(username) {
         leaderboard.dataset.id = username.id
+        const rulesText = document.querySelector('#rules-text')
+        const rulesTextUl = document.querySelector("body > div > div.right-container > div.user-bar > div.rules > ul")
+        rulesText.innerHTML = ""
+        rulesTextUl.innerHTML = ""
         const pTag = document.createElement('p')
         pTag.innerHTML = ' '
         pTag.innerHTML = `Welcome to the game ${username.username}!`
@@ -257,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         ol.children.innerHTML = ''
         const li = document.createElement("li")
         li.innerHTML = `
-        ${scoreObj.username} 
+        ${scoreObj.username}
         <span id="high-score">${scoreObj.score}</span>`
 
         ol.append(li)

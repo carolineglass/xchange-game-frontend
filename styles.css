@@ -13,6 +13,7 @@
   body{
     font-family: 'Bungee Inline', cursive;
     font-size: 12px;
+    background-color: #AAEFDF;
    }
 
 .main-container {
@@ -21,22 +22,26 @@
     height: 100vh;
     margin: 0 0px;
     flex-direction: row;
-    background-color: lightcoral;
-    text-align: center
+    background-color: #AAEFDF;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .left-container {
     display: flex;
     flex-direction: column;
     width: 25%;
-    height: 100vh;
+    height: 95%;
     /* padding: 10px; */
-    background-color: cornflowerblue;
-    /* background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930);*/
+    /* background-color: cornflowerblue; */
+    background-image: url('https://image.freepik.com/free-photo/yellow-blue-geometric-background_23-2147668471.jpg');
     justify-content: center;
     align-items: center;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 20%;
+    box-shadow: 5px 10px;
+    margin-right: 10px;
 }
 
 .scoreboard {
@@ -61,7 +66,7 @@
 }
 
 .leaderboard li {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .leaderboard li span {
@@ -87,11 +92,11 @@
     display: flex;
     flex-direction: column;
     width: 75%;
-    height: 100vh;
+    height: 95%;
     /* padding: 10px; */
-    background-color: lightblue;
-    border: 1px solid rgb(0, 0, 0);
-    justify-content: center;
+    background-color:  #AAEFDF;
+    /* border: 1px solid rgb(0, 0, 0); */
+    /* justify-content: space-around; */
     align-items: center;
 }
 
@@ -103,7 +108,7 @@
     width: 95%;
     height: 50%;
     /* padding: 10px; */
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     /* border: 2px solid rgb(0, 0, 0); */
 }
 
@@ -113,15 +118,21 @@
     justify-content: space-around;
     align-items: center;
     width: 50%;
-    height: 100%;
+    height: 95%;
     /* padding: 10px; */
-    background-color: lightblue;
+    /* background-color: lightblue; */
+    background-image: url("https://i.pinimg.com/originals/b9/ea/4e/b9ea4e526fb0fc0fd8038ac713fbb881.jpg");
     /* border: 2px solid rgb(0, 0, 0); */
+    border-bottom-left-radius: 20%;
+    border-top-left-radius: 20%;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: 5px 10px;
 }
 
 #country-flag {
     max-width: 300px;
-    max-height: 50%;
+    max-height: 100%;
 }
 
 .item {
@@ -130,10 +141,16 @@
     justify-content: space-around;
     align-items: center;
     width: 50%;
-    height: 100%;
-    /* padding: 10px; */
-    background-color: lightblue;
-    /* border: 2px solid rgb(0, 0, 0); */
+    height: 95%;
+    /* padding-bottom: 30px; */
+    /* background-color: lightblue; */
+    background-image: url('https://i.pinimg.com/originals/b9/ea/4e/b9ea4e526fb0fc0fd8038ac713fbb881.jpg');
+    /* border: 1px solid rgb(0, 0, 0); */
+    border-bottom-right-radius: 20%;
+    border-top-right-radius: 20%;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    box-shadow: 5px 10px;
 }
 
 #item-img {
@@ -149,7 +166,7 @@
     width: 95%;
     height: 50%;
     /* padding: 10px; */
-    background-color: lightblue;
+    background-color: #AAEFDF;
     /* border: 2px solid rgb(0, 0, 0); */
 }
 
@@ -158,12 +175,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 45%;
+  height: 95%;
   /* padding: 10px; */
-  background-color: coral;
+  background-color: lightgoldenrodyellow;
   border: 1px solid black;
   border-radius: 10%;
+  box-shadow: 5px 10px;
 }
 
 .game-div {
@@ -171,12 +189,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
   /* padding: 10px; */
   border-radius: 10%;
-  background-color: lightcyan;
+  background-color: lightgoldenrodyellow;
   border: 1px solid black;
+  box-shadow: 5px 10px;
   /* background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930); */
 }
 
@@ -189,15 +208,15 @@
   height: 100%;
   /* padding: 10px; */
   /* background-color: lightblue; */
-  border-radius: 10%;
+  /* border-radius: 10%; */
   /* background-image: url(https://media.istockphoto.com/photos/international-currency-global-money-exchange-and-business-finance-picture-id610771930); */
   /* border: 2px solid rgb(0, 0, 0); */
 }
 
-#generate {
+/* #generate {
     width: 200px;
     height: 80px;
-}
+} */
 
 #x-marker p {
   color: rgb(160, 22, 22);
@@ -206,6 +225,57 @@
 #rules-text {
   font-size: 14px;
 }
+
+#counter {
+  font-size: 40px;
+}
+
+#game-title {
+  color: rgb(29, 103, 103);
+}
+
+ul {
+  align-self: baseline;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-right: 7.5%;
+}
+
+#correct-message {
+  align-self: center;
+  justify-self: center;
+}
+
+.guess-input {
+  height: 40px;
+  width: 50%;
+  border: 5px solid #AAEFDF ;
+  border-radius: 10%;
+}
+
+input.username {
+  height: 100%;
+  width: 70%;
+  /* border: 5px solid ; */
+  border-radius: 10%;
+}
+
+.username-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: inherit;
+    background-color: #AAEFDF ;
+    color: black;
+}
+
 /* experimenting with buttons */
 
 :root {
