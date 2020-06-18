@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     document.addEventListener('submit', e => {
         if(e.target.className === 'user-form'){
-            guessInput.value = ""
             e.preventDefault()
             guessButton.disabled = true
             generateButton.disabled = false
@@ -196,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             currentScore = '0 points'
             endGame()
         }
+        guessInput.value = ""
     }
 
     function endGame() {
