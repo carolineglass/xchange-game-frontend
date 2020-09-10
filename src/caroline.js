@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
         const randomInfo = data[randomNumber]
 
         renderAnswer(randomInfo)
-
         //renders the country img and info on the left div
         countryImg.src = randomInfo["country"]["flag"]
         countryName.innerText = randomInfo["country"]["name"]
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
             guessButton.disabled = true
             generateButton.disabled = false
             endGame()
-            console.log("time is up")
         } 
     }
     
@@ -110,9 +108,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
         const rate = conversion["country"]["rate"]
         const currency = conversion["country"]["currency"]
         const price = conversion["item"]["price"]
-    
         correctAnswer = price * rate
-        console.log(correctAnswer)
     }
 
     document.addEventListener('submit', e => {
@@ -121,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
             guessButton.disabled = true
             generateButton.disabled = false
             let guess = parseFloat(e.target.guess.value)
-            console.log(e.target.guess.value)
             calculateScore(guess)
 
             if (xTag.innerText.length === 3) {
@@ -137,8 +132,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
             `<h2 id="correct-message">The correct conversion is ${correctAnswer.toFixed(2)}. <br>
             You get ${currentScore}</h2>
             `
-            
-        // guessInput = ''
         } // if for user-form
 
         else if(e.target.className === 'username'){
@@ -161,8 +154,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             .then(resp => resp.json())
             .then(username => {renderGreeting(username)})
 
-        }// else if for username
-        
+        }// else if for username 
     })//end of submit guess
     
     function calculateScore(guess) {
@@ -174,22 +166,19 @@ document.addEventListener('DOMContentLoaded', function(e) {
             parsedScore += 5
             score.innerText = parsedScore
             currentScore = '5 points'
-            console.log('YOU GOT 5 POINTS!')
-        }//end of if for 10%
+        }//10%
 
         else if (x >= (y - y * .2) && x <= (y + y * .2)) {
             parsedScore += 3
             score.innerText = parsedScore
             currentScore = '3 points'
-            console.log('YOU GOT 3 POINTS!')
-        }//end of else if for 20%
+        }//20%
 
         else if (x >= (y - y * .3) && x <= (y + y * .3)) {
             parsedScore += 1
             score.innerText = parsedScore
             currentScore = '1 point'
-            console.log('YOU GOT 1 POINT!')
-        }//end of else if for 30%
+        }//30%
 
         else {
             currentScore = '0 points'
@@ -199,13 +188,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
     }
 
     function endGame() {
-        // GET AN X  
-        console.log('SO UNCULTURED')
+        // GET AN X
         xTag.innerText += 'X'
         xTag.style.fontSize = "30px"
         xMarker.append(xTag)
         if(xTag.innerText.length === 3){
-            console.log('end of game you uncultured person')
             const x = document.querySelector('.game-div')
             const y = document.querySelector('.game-over')
             x.style.display = 'none';
@@ -249,9 +236,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             },
             body: JSON.stringify({score: score.innerText})
         })
-        // .then(resp => resp.json())
         .then(fetchScores)
-
     }
 
     function fetchScores() {
@@ -267,9 +252,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
         score.sort(function (a, b) {
             return b.score - a.score;
           });
-    //this sorts by score highest to lowest
+    //sorts by score high to low
         score.slice(0,10).forEach(scoreObj => {
-    //this only renders the first 5 of the array 
+    //only renders the first 5 of the array 
             renderScore(scoreObj)}
         )
     }
